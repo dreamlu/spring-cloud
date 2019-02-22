@@ -2,7 +2,7 @@ spring:
   application:
     name: api-gateway
 #  datasource:
-#    url: jdbc:mysql://localhost:3306/dbkeda?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true
+#    url: jdbc:mysql://localhost:3306/cdhl?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true
 #    username: root
 #    password: root
   redis:
@@ -25,7 +25,7 @@ zuul:
   sensitive-headers: #解决HTTP请求头信息中的Cookie和Authorization都没有被正确地传递给具体服务，所以最终导致会话状态没有得到保持的问题。
   routes:
     eureka-web: #单实例路由配置
-      path: /web/**
+      path: /api/v1/**
       url: http://localhost:8008/eureka-web/
 #Spring Security配置
 #security:
