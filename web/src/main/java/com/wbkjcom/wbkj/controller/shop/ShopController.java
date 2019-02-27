@@ -2,7 +2,6 @@ package com.wbkjcom.wbkj.controller.shop;
 
 import com.wbkjcom.commons.lib.Lib;
 import com.wbkjcom.shop.model.Shop;
-import com.wbkjcom.wbkj.service.CategoryService;
 import com.wbkjcom.wbkj.service.shop.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +16,6 @@ public class ShopController {
 
     @Autowired
     ShopService shopService;
-
-    @Autowired CategoryService categoryService;
 
     /**
      * 创建
@@ -82,20 +79,6 @@ public class ShopController {
     @GetMapping("/search")
     @ResponseBody
     public Object search(@RequestParam(required = false) Map<String, Object> params, Shop shop) {
-//        List<Shop> u = shopService.search(params, shop);
         return shopService.search(params, shop);
     }
-
-//    @PostMapping("/update")
-//    @ResponseBody
-//    public Object update(Shop shop,Map<String, Object> model) {
-//        if(shopService.update(shop)){
-//            Category category = categoryService.getCategory(1L);
-//            // 楼层
-//            model.put("category", category);
-//            return GetInfoUtil.success();
-//        }else{
-//            return Lib.GetMapData(2,"注册失败");
-//        }
-//    }
 }

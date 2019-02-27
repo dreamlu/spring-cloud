@@ -34,8 +34,8 @@ zuul:
 #    password: root
 
 # 超时解决方案
-ribbon:
-  ReadTimeout: 3000
-  ConnectTimeout: 3000
+#ribbon:
+#  ReadTimeout: 3000
+#  ConnectTimeout: 3000
 
 

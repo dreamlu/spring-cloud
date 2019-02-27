@@ -11,7 +11,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * com.wbkjcom.wbkj.aspect
+ * des: aop测试
+ * author: dreamlu
  */
 @Component
 @Aspect
@@ -19,7 +20,7 @@ public class HttpAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
-    @Pointcut("execution(public * com.wbkjcom.wbkj.controller.UserController.*(..))")
+    @Pointcut("execution(public * com.wbkjcom.wbkj.controller.shop.ShopController.*(..))")
     public void log(){
     }
 

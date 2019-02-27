@@ -2,8 +2,8 @@ package com.wbkjcom.apigateway;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 @EnableZuulProxy
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(ApiGatewayApplication.class).web(true).run(args);
+		new SpringApplicationBuilder(ApiGatewayApplication.class).run();//web(WebApplicationType.NONE).run(args);
 	}
 
 	@Bean

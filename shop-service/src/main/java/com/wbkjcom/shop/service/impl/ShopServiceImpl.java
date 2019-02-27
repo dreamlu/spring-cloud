@@ -55,7 +55,7 @@ public class ShopServiceImpl implements ShopService {
 
 	@Override
 	public Shop findById(Long id) {
-		return shopRepository.findById(id);
+		return shopRepository.findById(id).get();
 	}
 
 	@Override
@@ -65,6 +65,6 @@ public class ShopServiceImpl implements ShopService {
 
 	@Override
 	public void delete(Long id) {
-		shopRepository.delete(id);
+		shopRepository.deleteById(id);
 	}
 }

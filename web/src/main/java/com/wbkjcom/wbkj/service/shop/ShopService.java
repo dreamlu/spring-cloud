@@ -1,7 +1,7 @@
 package com.wbkjcom.wbkj.service.shop;
 
 import com.wbkjcom.shop.model.Shop;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
