@@ -1,23 +1,16 @@
 package com.wbkjcom.wbkj.manager.impl;
 
-import com.wbkjcom.wbkj.config.Constants;
-import com.wbkjcom.wbkj.manager.TokenManager;
-import com.wbkjcom.wbkj.model.TokenModel;
+import com.wbkjcom.commons.manager.TokenManager;
+import com.wbkjcom.commons.model.TokenModel;
+import com.wbkjcom.commons.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
 /**
- * 实习考核项目
  * com.wbkjcom.apigateway.manager.impl
- * 2018-01-18-13:28
- * 2018
- *  on 2018-01-18.
  */
 @Component
 public class RedisTokenManager implements TokenManager {
@@ -32,39 +25,15 @@ public class RedisTokenManager implements TokenManager {
     }
 
     public TokenModel createToken (long userId) {
-        // 使用 uuid 作为源 token
-        String token = UUID.randomUUID ().toString ().replace ("-", "");
-        TokenModel model = new TokenModel (userId, token);
-        // 存储到 redis 并设置过期时间
-        redis.boundValueOps (userId).set (token, Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
-        return model;
+        return  new TokenUtil(redis).createToken(userId);
     }
 
     public TokenModel getToken (String authentication) {
-        if (authentication == null || authentication.length () == 0) {
-            return null;
-        }
-        String [] param = authentication.split ("_");
-        if (param.length != 2) {
-            return null;
-        }
-        // 使用 userId 和源 token 简单拼接成的 token，可以增加加密措施
-        long userId = Long.parseLong (param [0]);
-        String token = param [1];
-        return new TokenModel (userId, token);
+        return  new TokenUtil(redis).getToken(authentication);
     }
 
     public boolean checkToken (TokenModel model) {
-        if (model == null) {
-            return false;
-        }
-        String token =redis.boundValueOps (model.getUserId ()).get ();
-        if (token == null || !token.equals (model.getToken ())) {
-            return false;
-        }
-        // 如果验证成功，说明此用户进行了一次有效操作，延长 token 的过期时间
-        redis.boundValueOps (model.getUserId ()).expire (Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
-        return true;
+        return  new TokenUtil(redis).checkToken(model);
     }
 
     public void deleteToken (long userId) {

@@ -1,5 +1,6 @@
 package com.wbkjcom.commons.lib;
 
+import com.wbkjcom.commons.api.GetInfoN;
 import com.wbkjcom.commons.api.MapData;
 
 /**
@@ -36,6 +37,7 @@ public final class Lib {
 			CodeAliPay     = 262, // 支付宝支付相关
 			CodeText       = 271, // 全局文字提示
 			CodeChat       = 280, // chat相关
+			CodeNoRoute    = 404, // 系统繁忙
 			CodeError      = 500; // 系统繁忙
 
 	// 约定提示信息
@@ -52,11 +54,12 @@ public final class Lib {
 			MsgCountErr  = "用户账号或密码错误",
 			MsgNoCount   = "用户账号不存在",
 			MsgLackArgs  = "缺少参数",
-			MsgValidate  = "验证成功";
+			MsgValidate  = "验证成功",
+			MsgFile      = "上传成功";
 
 	// 约定提示信息
 	public static final MapData
-			MapSuccess   = new MapData(CodeError, MsgSuccess),     // 统一成功
+			MapSuccess   = new MapData(CodeSuccess, MsgSuccess),     // 统一成功
 			MapError     = new MapData(CodeError, MsgError),       // 统一错误
 			MapUpdate    = new MapData(CodeUpdate, MsgUpdate),     // 修改成功
 			MapDelete    = new MapData(CodeDelete, MsgDelete),     // 删除成功
@@ -73,5 +76,10 @@ public final class Lib {
 	// 信息通用,状态码及信息提示
 	public static final MapData GetMapData(Integer status, String msg) {
 		return new MapData(status, msg);
+	}
+
+	// 信息通用,状态码及信息提示
+	public static final Object GetMapData(Integer status, String msg, Object data) {
+		return new GetInfoN<Object>(status, msg, data);
 	}
 }

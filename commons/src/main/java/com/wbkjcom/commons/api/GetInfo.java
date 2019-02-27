@@ -15,6 +15,7 @@ public class GetInfo<T> extends GetInfoN {
         super.setStatus(status);
         super.setMsg(msg);
         super.setData(data);
+        this.pager = pager;
     }
 
     public Pager getPager() {

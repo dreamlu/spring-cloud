@@ -16,7 +16,7 @@
         <module>api-gateway</module>
         <module>category-service</module>
         <module>order-service</module>
-        <!--<module>model</module>-->
+        <module>shop-service</module>
     </modules>
 
     <parent>
@@ -35,11 +35,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--&lt;!&ndash; jetty 替换 tomcat&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-jetty</artifactId>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+        <!-- 模板引擎 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,6 +72,12 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
+        <!--<dependency>-->
+            <!--&lt;!&ndash; Required to use PATCH &ndash;&gt;-->
+            <!--<groupId>io.github.openfeign</groupId>-->
+            <!--<artifactId>feign-httpclient</artifactId>-->
+            <!--<version>10.2.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

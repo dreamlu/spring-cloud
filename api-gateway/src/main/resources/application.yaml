@@ -2,7 +2,7 @@ spring:
   application:
     name: api-gateway
 #  datasource:
-#    url: jdbc:mysql://localhost:3306/cdhl?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true
+#    url: jdbc:mysql://localhost:3306/xmd?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true
 #    username: root
 #    password: root
   redis:
@@ -33,6 +33,9 @@ zuul:
 #    name: root
 #    password: root
 
-
+# 超时解决方案
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
 
 

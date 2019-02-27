@@ -3,7 +3,7 @@ package com.wbkjcom.wbkj.controller;
 import com.wbkjcom.category.model.Category;
 import com.wbkjcom.commons.lib.Lib;
 import com.wbkjcom.commons.util.GetInfoUtil;
-import com.wbkjcom.user.model.User;
+import com.wbkjcom.shop.model.User;
 import com.wbkjcom.wbkj.service.CategoryService;
 import com.wbkjcom.wbkj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +39,12 @@ public class UserController{
             session.setAttribute("userId",u.getId());
             session.setAttribute("userName",u.getName());
 
-            Category category = categoryService.getCategory(1L);
-            // 楼层
-            model.addAttribute("category", category);
+//            Category category = categoryService.getCategory(1L);
+//            // 楼层
+//            model.addAttribute("category", category);
             return GetInfoUtil.success();
         }
-        return Lib.GetMapData(2, "用户名或密码有误");
+        return Lib.MapCountErr;
     }
 
     @PostMapping("/register")

@@ -1,11 +1,7 @@
 package com.wbkjcom.wbkj.controller;
 
 /**
- * 销售管理系统
  * com.wbkjcom.wbkj.controller
- * 2018-01-11-13:09
- * 2018
- *  on 2018-01-11.
  */
 
 import org.springframework.beans.factory.annotation.Autowired;

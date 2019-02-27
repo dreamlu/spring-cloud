@@ -8,11 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
  * com.wbkjcom.wbkj.controller
- * 2017-12-29-16:41
- * 2017
- *  on 2017-12-29.
  */
 @Component
 public class BaseController {

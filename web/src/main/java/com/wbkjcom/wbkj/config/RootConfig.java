@@ -7,9 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 /**
- * @Author:suxiongwei
  * @Description:配置
- * @Date:14:18 2017-12-28
  */
 @Configuration
 public class RootConfig {

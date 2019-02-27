@@ -11,11 +11,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
  * com.wbkjcom.wbkj.aspect
- * 2017-12-26-17:54
- * 2017
- *  on 2017-12-26.
  */
 @Component
 @Aspect

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-@EnableConfigServer
+@EnableConfigServer// 激活该应用为配置文件服务器：读取远程配置文件，转换为rest接口服务
 @SpringBootApplication
 @EnableEurekaClient
 public class ConfigServerGitApplication {

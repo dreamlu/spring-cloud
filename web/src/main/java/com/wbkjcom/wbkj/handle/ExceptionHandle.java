@@ -26,7 +26,7 @@ public class ExceptionHandle {
 			return Lib.GetMapData(myException.getStatus(), myException.getMessage());
 		} else {
 			logger.error("系统异常={}", e);
-			return Lib.GetMapData(Lib.CodeError, Lib.MsgError);
+			return Lib.GetMapData(Lib.CodeError, Lib.MsgError, e.getMessage());
 		}
 	}
 }

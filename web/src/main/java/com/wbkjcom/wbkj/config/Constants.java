@@ -1,9 +1,7 @@
 package com.wbkjcom.wbkj.config;
 
 /**
- * @Author:suxiongwei
  * @Description:常量
- * @Date:13:35 2018-01-18
  */
 public class Constants {
     /**

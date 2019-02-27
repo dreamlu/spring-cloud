@@ -1,7 +1,7 @@
 package com.wbkjcom.wbkj.service;
 
 import com.wbkjcom.category.model.Category;
-import com.wbkjcom.user.model.User;
+import com.wbkjcom.shop.model.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
- *
  * com.wbkjcom.wbkj.service
- * 2017-12-28-14:19
- * 2017
- *  on 2017-12-28.
  */
 @Service
 public class WebService {

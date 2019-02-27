@@ -1,12 +1,12 @@
 package com.wbkjcom.wbkj.controller;
 
 import com.wbkjcom.commons.lib.Lib;
+import com.wbkjcom.commons.manager.TokenManager;
+import com.wbkjcom.commons.model.TokenModel;
 import com.wbkjcom.commons.util.GetInfoUtil;
-import com.wbkjcom.user.model.User;
+import com.wbkjcom.shop.model.User;
 import com.wbkjcom.wbkj.annotation.Authorization;
 import com.wbkjcom.wbkj.annotation.CurrentUser;
-import com.wbkjcom.wbkj.manager.TokenManager;
-import com.wbkjcom.wbkj.model.TokenModel;
 import com.wbkjcom.wbkj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class TokenController {
     private UserService userService;
 
     @Autowired
-    private TokenManager tokenManager;
+    private TokenManager tokenManager;// = new RedisTokenManager();
 
     @PostMapping("/login")
     public Object login (User user) {

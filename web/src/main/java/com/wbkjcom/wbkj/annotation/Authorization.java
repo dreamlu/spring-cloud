@@ -1,11 +1,7 @@
 package com.wbkjcom.wbkj.annotation;
 
 /**
- * 实习考核项目
  * com.wbkjcom.apigateway.authorization.annotation
- * 2018-01-18-13:48
- * 2018
- *  on 2018-01-18.
  */
 
 import java.lang.annotation.ElementType;
