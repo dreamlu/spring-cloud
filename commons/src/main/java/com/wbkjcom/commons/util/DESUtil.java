@@ -9,7 +9,7 @@ import java.util.List;
  * @author xuan
  * @version $Revision: 1.0 $, $Date: 2019-02-26 15:03 $
  */
-public abstract class DESUtils {
+public abstract class DESUtil {
 
     public static final String CONST_DES_KEY_1 = "des.key1";
     public static final String CONST_DES_KEY_2 = "des.key2";

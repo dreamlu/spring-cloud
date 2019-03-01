@@ -15,4 +15,9 @@ public class GetInfoUtil {
         return Lib.MapSuccess;
     }
 
+//    // search
+//    public static Object search(){
+//
+//    }
+
 }

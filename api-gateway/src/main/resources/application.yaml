@@ -21,12 +21,20 @@ eureka:
 
 
 zuul:
+  prefix: /api/v1
+#  strip-prefix: false
   add-host-header: true #解决重定向问题
   sensitive-headers: #解决HTTP请求头信息中的Cookie和Authorization都没有被正确地传递给具体服务，所以最终导致会话状态没有得到保持的问题。
   routes:
+    # yaml文件确保路由拦截顺序
+    shop-service:
+      path: /shop-service/**
+      serviceId: shop-service
+    auth-service: /auth-service/**
     eureka-web: #单实例路由配置
-      path: /api/v1/**
+      path: /**
       url: http://localhost:8008/eureka-web/
+
 #Spring Security配置
 #security:
 #  user:
