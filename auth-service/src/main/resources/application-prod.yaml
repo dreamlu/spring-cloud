@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: @jdbc.url.prod@
+    username: @jdbc.username.prod@
+    password: @jdbc.password.prod@
+  jpa:
+    show-sql: false
+  redis:
+    host: @redis.url.prod@
+
+eureka:
+  client:
+    service-url:
+      defaultZone: @eureka.url.prod@

@@ -17,11 +17,11 @@ public class AuthApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		System.out.println("注册结果:"+adminService.register(new Admin("admin", "123456")));
+		System.out.println("注册结果:" + adminService.register(new Admin(null,"admin", "123456")));
 	}
 
 	@Test
-	public void login(){
-		System.out.println("登录结果:"+adminService.login(new Admin("admin", "123456")));
+	public void login() {
+		System.out.println("登录结果:" + adminService.login(new Admin(null,"admin", "123456")));
 	}
 }

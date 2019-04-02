@@ -1,20 +1,20 @@
 package com.wbkjcom.auth.api;
 
+import com.deercoder.commons.lib.Lib;
+import com.deercoder.commons.manager.cache.CacheManager;
+import com.deercoder.commons.manager.cache.impl.RedisManager;
+import com.deercoder.commons.model.CacheModel;
+import com.deercoder.commons.model.TokenModel;
 import com.wbkjcom.auth.model.Admin;
 import com.wbkjcom.auth.service.AdminService;
-import com.wbkjcom.commons.lib.Lib;
-import com.wbkjcom.commons.manager.TokenManager;
-import com.wbkjcom.commons.manager.impl.RedisTokenManager;
-import com.wbkjcom.commons.model.TokenModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 /**
  * des: 登录等权限验证操作
@@ -25,27 +25,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private Logger logger = LoggerFactory.getLogger(AdminController.class);
+	private CacheManager cacheManager;
 
-//    private RedisTemplate<Long, String> redis = new RedisTemplate<Long, String>();
+	@Autowired
+	public void setRedis(RedisConnectionFactory redisConnectionFactory) {
+		this.cacheManager = new RedisManager(redisConnectionFactory);
+	}
 
-    private TokenManager tokenManager = new RedisTokenManager(new RedisTemplate<Long, String>());
+	@Autowired
+	private AdminService adminService;
 
-    @Autowired
-    private AdminService adminService;
+	@PostMapping(value = "/login")
+	@SuppressWarnings("Duplicates")
+	public Object login(@RequestBody Admin admin) {
+		admin = adminService.login(admin);
 
-    @Autowired
-    DiscoveryClient discoveryClient;
+		if (admin != null) {
+			// 使用 uuid 作为源 token
+			String     token = UUID.randomUUID().toString().replace("-", "");
+			TokenModel model = new TokenModel(admin.getId(), token);
+			// 30 分钟有效期
+			cacheManager.set(model.getToken(), new CacheModel(30L, model));
 
-    @PostMapping(value = "/login")
-    public Object login(@RequestBody Admin admin) {
-        admin = adminService.login(admin);
+			return Lib.GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, model);
+		}
 
-        if(admin != null) {
-            TokenModel model = tokenManager.createToken(admin.getId());
-            return Lib.GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, model);
-        }
+		return Lib.MapNoAuth;
+	}
 
-        return Lib.MapNoAuth;
-    }
+	@PostMapping(value = "/update")
+	public Object register(@RequestBody Admin admin) {
+		adminService.update(admin);
+		return Lib.MapUpdate;
+	}
+
+//	@PostMapping(value = "/register")
+//	public Object register(@RequestBody Admin admin) {
+//	}
+
 }

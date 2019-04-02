@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.wbkjcom</groupId>
+<!--	<groupId>com.deercoder</groupId>-->
 	<artifactId>config-server-git</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -12,8 +12,8 @@
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
-		<artifactId>wbkj</artifactId>
-		<groupId>com.wbkjcom</groupId>
+		<artifactId>spring-cloud</artifactId>
+		<groupId>com.deercoder</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
@@ -34,18 +34,6 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 	</dependencies>
-
-	<!--<dependencyManagement>-->
-		<!--<dependencies>-->
-			<!--<dependency>-->
-				<!--<groupId>org.springframework.cloud</groupId>-->
-				<!--<artifactId>spring-cloud-dependencies</artifactId>-->
-				<!--<version>Dalston.SR1</version>-->
-				<!--<type>pom</type>-->
-				<!--<scope>import</scope>-->
-			<!--</dependency>-->
-		<!--</dependencies>-->
-	<!--</dependencyManagement>-->
 
 	<build>
 		<plugins>

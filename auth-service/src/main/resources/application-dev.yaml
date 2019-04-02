@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: @jdbc.url.dev@
+    username: @jdbc.username.dev@
+    password: @jdbc.password.dev@
+  jpa:
+    show-sql: true
+  redis:
+    host: @redis.url.dev@
+
+eureka:
+  client:
+    service-url:
+      defaultZone: @eureka.url.dev@
+

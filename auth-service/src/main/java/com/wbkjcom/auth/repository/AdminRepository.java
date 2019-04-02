@@ -6,13 +6,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @CacheConfig(cacheNames = "backs")
-public interface AdminRepository extends JpaRepository<Admin,Long>{
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 
 //    @CachePut
 //    Admin save(Admin user);
 
-//    @CacheEvict
+	//    @CacheEvict
 //    void delete(Long id);
-    @Cacheable
-    Admin findByAccount(String account);
+//    @Cacheable
+	Admin findByAccount(String account);
 }

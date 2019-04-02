@@ -1,8 +1,8 @@
 package com.wbkjcom.shop.service.impl;
 
-import com.wbkjcom.commons.api.GetInfo;
-import com.wbkjcom.commons.api.Pager;
-import com.wbkjcom.commons.lib.Lib;
+import com.deercoder.commons.api.GetInfo;
+import com.deercoder.commons.api.Pager;
+import com.deercoder.commons.lib.Lib;
 import com.wbkjcom.shop.model.Shop;
 import com.wbkjcom.shop.repository.ShopRepository;
 import com.wbkjcom.shop.service.ShopService;

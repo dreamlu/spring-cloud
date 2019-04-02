@@ -1,0 +1,8 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: @eureka.url.prod@
+
+spring:
+  redis:
+    host: @redis.url.prod@
