@@ -1,0 +1,87 @@
+# docker-compose
+# author: dreamlu
+# github.com/dreamlu
+version: '3'
+services:
+  #nginx:
+  #  container_name: w-nginx
+  #  image: nginx
+  #  restart: always
+  #  ports:
+  #    - 80:80
+  #    - 443:443
+  #  volumes:
+  #    - ./nginx/conf.d:/etc/nginx/conf.d
+
+  # mysql-server
+  mysql:
+    container_name: w-mysql
+    #image: mysql/mysql-server:5.7
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: spring-cloud
+      MYSQL_USER: dreamlu
+      MYSQL_PASSWORD: dreamlu
+      MYSQL_ROOT_PASSWORD: dreamlu
+      MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Shanghai
+    ports:
+      - 3308:3306
+    restart: always
+    #expose:
+    #  - 3308
+  # redis
+  redis:
+    image: redis:4.0
+    ports:
+      - 6378:6379
+    container_name: w-redis
+    restart: always
+  # api gateway
+  api-gateway:
+    image: registry.cn-hangzhou.aliyuncs.com/deercoder/dreamlu:spring-cloud-api-gateway
+    ports:
+      - 8008:8008
+    container_name: w-api
+    #depends_on:
+    #  - eureka
+    #links:
+    #  - eureka:eureka-server
+    restart: always
+  # eureka
+  eureka-server:
+    image: registry.cn-hangzhou.aliyuncs.com/deercoder/dreamlu:spring-cloud-eureka-server
+    ports:
+      - 8761:8761
+    container_name: w-eureka
+    restart: always
+  # auth service
+  auth-service:
+    image: registry.cn-hangzhou.aliyuncs.com/deercoder/dreamlu:spring-cloud-auth-service
+    ports:
+      - 8888:8888
+    container_name: w-auth
+    restart: always
+    #links:
+    #  - mysql
+    #  - redis
+    #depends_on:
+    #  - mysql
+  # common service
+  common-service:
+    image: registry.cn-hangzhou.aliyuncs.com/deercoder/dreamlu:spring-cloud-common-service
+    ports:
+      - 8010:8010
+    container_name: w-common
+    restart: always
+    # 图片挂载目录(自定义)
+    volumes:
+        - /home/ubuntu/spring-cloud/common-service:/common-service
+
+  # shop service
+  shop-service:
+    image: registry.cn-hangzhou.aliyuncs.com/deercoder/dreamlu:spring-cloud-shop-service
+    ports:
+      - 8777:8777
+    container_name: w-shop
+    restart: always

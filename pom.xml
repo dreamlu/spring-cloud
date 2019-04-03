@@ -36,7 +36,7 @@
 
         <!-- 开发环境 -->
         <jdbc.url.dev>
-            <![CDATA[jdbc:mysql://localhost:3306/xmd?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true]]></jdbc.url.dev>
+            <![CDATA[jdbc:mysql://localhost:3306/spring-cloud?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true]]></jdbc.url.dev>
         <jdbc.username.dev>root</jdbc.username.dev>
         <jdbc.password.dev>lucheng</jdbc.password.dev>
         <!-- 服务发现 -->
@@ -46,16 +46,16 @@
 
         <!-- docker/prod环境 -->
         <jdbc.url.prod>
-            <![CDATA[jdbc:mysql://mysql:3306/xmd?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true]]></jdbc.url.prod>
+            <![CDATA[jdbc:mysql://mysql:3306/spring-cloud?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true]]></jdbc.url.prod>
         <jdbc.username.prod>root</jdbc.username.prod>
-        <jdbc.password.prod>wobangkj</jdbc.password.prod>
+        <jdbc.password.prod>dreamlu</jdbc.password.prod>
         <!-- 服务发现 -->
         <eureka.url.prod>http://eureka-server:8761/eureka/</eureka.url.prod>
         <!-- redis url -->
         <redis.url.prod>redis</redis.url.prod>
 
         <!-- 开发模式, dev/prod -->
-        <devMode>dev</devMode>
+        <devMode>prod</devMode>
 
     </properties>
 

@@ -1,0 +1,88 @@
+spring:
+  profiles:
+    active: @devMode@
+  application:
+    name: common-service
+  jackson:
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES # 驼峰
+  redis:
+    database: 0
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 8 # 连接池中的最大空闲连接
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 3000 # 连接超时时间（毫秒）, 2.x不能为0
+
+  resources:
+    static-locations: classpath:resources/,file:common-service/static/
+  mvc:
+    static-path-pattern: /static/** # 资源映射
+
+server:
+  port: 8010
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://eureka-server:8761/eureka/
+
+# 微信开发
+#debug: true
+#logging:
+#  level:
+#    org.springframework.web: info
+## 小程序
+#    com.github.binarywang.demo.wx.miniapp: debug
+#    cn.binarywang.wx.miniapp: debug
+## 支付提现
+#    com.github.binarywang.demo.wx.pay: debug
+#    com.github.binarywang.wxpay: debug30
+wx:
+  # 微信小程序--支持多appid
+  miniapp:
+    configs:
+      - appid: wx24d2372672d90fec  #微信小程序--商家端
+        secret: 76ec1d4412cd80a987a8139477c8e219 #微信小程序的Secret
+        token:  #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+
+      - appid: wxf69e353da456ecfb  #微信小程序--客户端
+        secret: 3b9407acaf2fb74ff198c23445dc47c0 #微信小程序的Secret
+        token:  #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+
+      - appid: wx663caabe7e67ecef  #微信小程序--员工端
+        secret: 4d45a2a8c7a22db5b19970edf443dd15 #微信小程序的Secret
+        token:  #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+
+  # 微信支付提现--支持多appid
+  pay:
+    configs:
+      - appId: wx24d2372672d90fec #微信公众号或者小程序等的appid
+        mchId: 1484894562 #微信支付商户号
+        mchKey: asdfs8s09df8s0d9f80s9df8s09df0sd #微信支付商户密钥
+        # subAppId: #服务商模式下的子商户公众账号ID
+        # subMchId: #服务商模式下的子商户号
+        keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+
+      - appId: wxf69e353da456ecfb #微信公众号或者小程序等的appid
+        mchId: 1484894562 #微信支付商户号
+        mchKey: asdfs8s09df8s0d9f80s9df8s09df0sd #微信支付商户密钥
+        # subAppId: #服务商模式下的子商户公众账号ID
+        # subMchId: #服务商模式下的子商户号
+        keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+
+      - appId: wx663caabe7e67ecef #微信公众号或者小程序等的appid
+        mchId: 1484894562 #微信支付商户号
+        mchKey: asdfs8s09df8s0d9f80s9df8s09df0sd #微信支付商户密钥
+        # subAppId: #服务商模式下的子商户公众账号ID
+        # subMchId: #服务商模式下的子商户号
+        keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
