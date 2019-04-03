@@ -38,8 +38,10 @@
 2.每个服务单独构建镜像(双击配置好的构建命令)  
 ![构建步骤1](common-service/static/file/docker1.png)  
 ![构建步骤2](common-service/static/file/docker2.png)  
-3.docker-compose管理docker(docker目录下:命令docker-compose -f docker-compose.yaml up -d)  
-3.运行结果查看同本地测试结果(http://localhost:8761)  
+3.构建结果  
+![镜像构建结果](common-service/static/file/docker3.png)  
+4.docker-compose管理docker(docker目录下:命令docker-compose -f docker-compose.yaml up -d)  
+5.运行结果查看同本地测试结果(http://localhost:8761)  
 
 - 注:  
 >1.如遇识别maven项目失败, 打开project structure-->Modules-->添加-->import module-->选择maven-->下一步-->完成    
