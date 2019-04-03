@@ -45,20 +45,20 @@ wx:
   # 微信小程序--支持多appid
   miniapp:
     configs:
-      - appid: wx24d2372672d90fec  #微信小程序--商家端
-        secret: 76ec1d4412cd80a987a8139477c8e219 #微信小程序的Secret
+      - appid:   #微信小程序--商家端
+        secret:  #微信小程序的Secret
         token:  #微信小程序消息服务器配置的token
         aesKey: #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON
 
-      - appid: wxf69e353da456ecfb  #微信小程序--客户端
-        secret: 3b9407acaf2fb74ff198c23445dc47c0 #微信小程序的Secret
+      - appid:   #微信小程序--客户端
+        secret:  #微信小程序的Secret
         token:  #微信小程序消息服务器配置的token
         aesKey: #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON
 
-      - appid: wx663caabe7e67ecef  #微信小程序--员工端
-        secret: 4d45a2a8c7a22db5b19970edf443dd15 #微信小程序的Secret
+      - appid:   #微信小程序--员工端
+        secret:  #微信小程序的Secret
         token:  #微信小程序消息服务器配置的token
         aesKey: #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON
@@ -66,23 +66,23 @@ wx:
   # 微信支付提现--支持多appid
   pay:
     configs:
-      - appId: wx24d2372672d90fec #微信公众号或者小程序等的appid
-        mchId: 1484894562 #微信支付商户号
-        mchKey: asdfs8s09df8s0d9f80s9df8s09df0sd #微信支付商户密钥
+      - appId:  #微信公众号或者小程序等的appid
+        mchId:  #微信支付商户号
+        mchKey:  #微信支付商户密钥
         # subAppId: #服务商模式下的子商户公众账号ID
         # subMchId: #服务商模式下的子商户号
-        keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+        keyPath: classpath:cert/xxxx.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
 
-      - appId: wxf69e353da456ecfb #微信公众号或者小程序等的appid
-        mchId: 1484894562 #微信支付商户号
-        mchKey: asdfs8s09df8s0d9f80s9df8s09df0sd #微信支付商户密钥
+      - appId:  #微信公众号或者小程序等的appid
+        mchId:  #微信支付商户号
+        mchKey:  #微信支付商户密钥
         # subAppId: #服务商模式下的子商户公众账号ID
         # subMchId: #服务商模式下的子商户号
-        keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+        keyPath: classpath:cert/xxxx.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
 
-      - appId: wx663caabe7e67ecef #微信公众号或者小程序等的appid
-        mchId: 1484894562 #微信支付商户号
-        mchKey: asdfs8s09df8s0d9f80s9df8s09df0sd #微信支付商户密钥
+      - appId:  #微信公众号或者小程序等的appid
+        mchId:  #微信支付商户号
+        mchKey:  #微信支付商户密钥
         # subAppId: #服务商模式下的子商户公众账号ID
         # subMchId: #服务商模式下的子商户号
-        keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+        keyPath: classpath:cert/xxxx.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）

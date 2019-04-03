@@ -55,7 +55,7 @@
         <redis.url.prod>redis</redis.url.prod>
 
         <!-- 开发模式, dev/prod -->
-        <devMode>prod</devMode>
+        <devMode>dev</devMode>
 
     </properties>
 
