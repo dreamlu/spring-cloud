@@ -15,19 +15,34 @@ services:
 
   # mysql-server
   mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+      args:
+        MYSQL_VERSION: 5.7
+        # 账号密码同下环境变量值
+        MYSQL_DATABASE: xmd
+        MYSQL_USER: dreamlu
+        MYSQL_PASSWORD: wobangkj
+        MYSQL_ROOT_PASSWORD: wobangkj
+    #command:
+    #privileged: true
     container_name: w-mysql
     #image: mysql/mysql-server:5.7
-    image: mysql:5.7
+    #image: mysql:5.7
     environment:
-      MYSQL_DATABASE: spring-cloud
+      MYSQL_DATABASE: xmd
       MYSQL_USER: dreamlu
-      MYSQL_PASSWORD: dreamlu
-      MYSQL_ROOT_PASSWORD: dreamlu
+      MYSQL_PASSWORD: wobangkj
+      MYSQL_ROOT_PASSWORD: wobangkj
       MYSQL_ROOT_HOST: '%'
       TZ: Asia/Shanghai
     ports:
       - 3308:3306
     restart: always
+    # sql备份目录
+    volumes:
+      - /home/ubuntu/xmd/bak:/bak
     #expose:
     #  - 3308
   # redis
