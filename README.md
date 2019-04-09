@@ -4,7 +4,7 @@
 创建数据库spring-cloud(表由jpa创建)  
 表中数据第一次创建均为空,需要自行添加    
 
-## 技术棧
+## 技术栈
 1.spring cloud/boot  
 2.mysql  
 3.redis  
