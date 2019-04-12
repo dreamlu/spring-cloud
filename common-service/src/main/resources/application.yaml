@@ -21,6 +21,10 @@ spring:
     static-locations: classpath:resources/,file:common-service/static/
   mvc:
     static-path-pattern: /static/** # 资源映射
+  servlet:
+    multipart:
+      max-file-size: @max-file-size@MB # 单个文件大小
+      max-request-size: @max-request-size@MB # 一次上传最大大小
 
 server:
   port: 8010

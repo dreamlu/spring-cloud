@@ -54,6 +54,11 @@
         <!-- redis url -->
         <redis.url.prod>redis</redis.url.prod>
 
+        <!-- 单个文件上传大小,单位MB -->
+        <max-file-size>32</max-file-size>
+        <!-- 一次文件上传最大大小 -->
+        <max-request-size>320</max-request-size>
+
         <!-- 开发模式, dev/prod -->
         <devMode>dev</devMode>
 
