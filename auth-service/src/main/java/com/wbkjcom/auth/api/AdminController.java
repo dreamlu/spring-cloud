@@ -7,6 +7,7 @@ import com.deercoder.commons.model.CacheModel;
 import com.deercoder.commons.model.TokenModel;
 import com.wbkjcom.auth.model.Admin;
 import com.wbkjcom.auth.service.AdminService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,9 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+
 	@PostMapping(value = "/login")
 	@SuppressWarnings("Duplicates")
 	public Object login(@RequestBody Admin admin) {
@@ -47,10 +51,14 @@ public class AdminController {
 			// 30 分钟有效期
 			cacheManager.set(model.getToken(), new CacheModel(30L, model));
 
+
+			// 消息队列测试
+			rabbitTemplate.convertAndSend("account", admin.getAccount());
+
 			return Lib.GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, model);
 		}
 
-		return Lib.MapNoAuth;
+		return Lib.MapCountErr;
 	}
 
 	@PostMapping(value = "/update")

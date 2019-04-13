@@ -178,7 +178,7 @@ public class ShopServiceImpl implements ShopService {
 //			return Lib.MapNoResult;
 //		}
 //
-//		return new GetInfo<Object>(Lib.CodeSuccess, Lib.MsgSuccess, res, new Pager(clientPage, sumPage, everyPage));
+//		return new GetInfoPager<Object>(Lib.CodeSuccess, Lib.MsgSuccess, res, new Pager(clientPage, sumPage, everyPage));
 	}
 
 	@Override

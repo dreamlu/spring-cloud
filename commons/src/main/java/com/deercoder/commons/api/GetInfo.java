@@ -3,25 +3,24 @@ package com.deercoder.commons.api;
 /**
  * com.wbkjcom.wbkj.model
  */
-public class GetInfo<T> extends GetInfoN {
+public class GetInfo<T> extends MapData {
 
-	private Pager pager; // 页码信息
+	private T data;
 
 	public GetInfo() {
 	}
 
-	public GetInfo(Integer status, String msg, T data, Pager pager) {
+	public GetInfo(Integer status, String msg, T data) {
 		super.setStatus(status);
 		super.setMsg(msg);
-		super.setData(data);
-		this.pager = pager;
+		this.data = data;
 	}
 
-	public Pager getPager() {
-		return pager;
+	public T getData() {
+		return data;
 	}
 
-	public void setPager(Pager pager) {
-		this.pager = pager;
+	public void setData(T data) {
+		this.data = data;
 	}
 }

@@ -3,6 +3,9 @@ package com.deercoder.shop.api;
 import com.deercoder.shop.model.ShopDe;
 import com.deercoder.shop.service.ShopService;
 import com.deercoder.shop.model.Shop;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +14,14 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/shop")
+
 public class ShopController {
 
 	@Autowired
 	private ShopService shopService;
-
-	@Autowired
-	DiscoveryClient discoveryClient;
 
 	@PostMapping(value = "/register")
 	public Object create(@RequestBody Shop shop) {
@@ -65,5 +67,13 @@ public class ShopController {
 	@GetMapping("/getId")
 	public Object getIdByUnionid(String unionid) {
 		return shopService.getIdByUnionid(unionid);
+	}
+
+	// 统计店铺登陆
+	//@GetMapping("/countPer")
+	@RabbitListener(queues = "countPer")
+	@RabbitHandler
+	public void countPer(String account) {
+		log.info("用户账号:" + account);
 	}
 }

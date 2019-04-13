@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-<!--        <module>common-service</module>-->
+        <module>common-service</module>
         <module>auth-service</module>
         <module>eureka-server</module>
         <module>api-gateway</module>
@@ -160,37 +160,6 @@
                 </plugins>
             </build>
         </profile>
-        <!-- 全局变量替代mvn 命令执行profile -->
-        <!--&lt;!&ndash; 开发版本 &ndash;&gt;
-        <profile>
-            &lt;!&ndash; 本地开发环境 &ndash;&gt;
-            <id>dev</id>
-            <properties>
-                &lt;!&ndash; 环境标识，需要与配置文件的名称相对应 &ndash;&gt;
-                <activatedProperties>dev</activatedProperties>
-                <jdbc.url><![CDATA[jdbc:mysql://localhost:3306/xmd?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true]]></jdbc.url>
-                <jdbc.username>root</jdbc.username>
-                <jdbc.password>lucheng</jdbc.password>
-                &lt;!&ndash; 服务发现 &ndash;&gt;
-                <eureka.url>http://localhost:8761/eureka/</eureka.url>
-            </properties>
-            <activation>
-                &lt;!&ndash; 设置默认激活这个配置 &ndash;&gt;
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            &lt;!&ndash; 发布环境 &ndash;&gt;
-            <id>prod</id>
-            <properties>
-                <activatedProperties>prod</activatedProperties>
-                <jdbc.url><![CDATA[jdbc:mysql://mysql:3306/xmd?useUnicode=true&characterEncoding=UTF-8&sessionVariables=FOREIGN_KEY_CHECKS=0&autoReconnect=true]]></jdbc.url>
-                <jdbc.username>root</jdbc.username>
-                <jdbc.password>wobangkj</jdbc.password>
-                &lt;!&ndash; 服务发现 &ndash;&gt;
-                <eureka.url>http://eureka-server:8761/eureka/</eureka.url>
-            </properties>
-        </profile>-->
     </profiles>
 
     <!-- 仓库地址源更换-->

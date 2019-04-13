@@ -1,7 +1,7 @@
 package com.deercoder.commons.lib;
 
+import com.deercoder.commons.api.GetInfoPager;
 import com.deercoder.commons.api.GetInfo;
-import com.deercoder.commons.api.GetInfoN;
 import com.deercoder.commons.api.MapData;
 import com.deercoder.commons.api.Pager;
 
@@ -86,28 +86,28 @@ public final class Lib {
 	}
 
 	// 信息通用,状态码及信息提示
-	public static final Object GetMapData(Integer status, String msg, Object data) {
-		return new GetInfoN<>(status, msg, data);
+	public static final GetInfo GetMapData(Integer status, String msg, Object data) {
+		return new GetInfo<>(status, msg, data);
 	}
 
 	// 信息通用,状态码及信息提示, 分页
-	public static final Object GetMapDataPager(Object data, Integer clientPage, Integer sumPage, Integer everyPage) {
-		return new GetInfo<>(Lib.CodeSuccess, Lib.MsgSuccess, data, new Pager(clientPage, sumPage, everyPage));
+	public static final GetInfoPager GetMapDataPager(Object data, Integer clientPage, Integer sumPage, Integer everyPage) {
+		return new GetInfoPager<>(Lib.CodeSuccess, Lib.MsgSuccess, data, new Pager(clientPage, sumPage, everyPage));
 	}
 
 	// 信息通用,状态码及信息提示, 分页
 	@Deprecated
-	public static final Object GetMapDataPager(Object data, Pager pager) {
-		return new GetInfo<>(Lib.CodeSuccess, Lib.MsgSuccess, data, pager);
+	public static final GetInfoPager GetMapDataPager(Object data, Pager pager) {
+		return new GetInfoPager<>(Lib.CodeSuccess, Lib.MsgSuccess, data, pager);
 	}
 
 	// 信息成功数据通用
-	public static final Object GetMapDataSuccess(Object data) {
+	public static final MapData GetMapDataSuccess(Object data) {
 		return GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, data);
 	}
 
 	// 信息失败数据通用
-	public static final Object GetMapDataError(Object data) {
+	public static final MapData GetMapDataError(Object data) {
 		return GetMapData(Lib.CodeError, Lib.MsgError, data);
 	}
 }

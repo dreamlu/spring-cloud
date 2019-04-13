@@ -91,7 +91,7 @@ services:
     restart: always
     # 图片挂载目录(自定义)
     volumes:
-        - /home/ubuntu/spring-cloud/common-service:/common-service
+      - /home/ubuntu/spring-cloud/common-service:/common-service
 
   # shop service
   shop-service:
@@ -100,3 +100,18 @@ services:
       - 8777:8777
     container_name: w-shop
     restart: always
+
+  # rabbitmq server
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "4369:4369"
+      - "1883:1883"
+      - "25672:25672"
+      - "5672:5672"
+      - "15672:15672"
+    container_name: w-rabbitmq
+    restart: always
+#  environment:
+#    RABBITMQ_DEFAULT_USER: root
+#    RABBITMQ_DEFAULT_PASS: root

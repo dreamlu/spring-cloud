@@ -17,6 +17,7 @@ COPY ["setup.sh","bak.sh","./"]
 #RUN sed -i "s/http:\/\/security.debian.org\/debian-security/https:\/\/mirrors.aliyun.com\/debian-security\//g" /etc/apt/sources.list
 
 # 定时任务软件包
+# nohup 可后台执行
 RUN apt update && apt install cron -y --no-install-recommends
 # 定时任务设置
 RUN chmod 755 setup.sh bak.sh

@@ -24,6 +24,10 @@ public class AdminServiceImpl implements AdminService {
 	public Admin login(Admin admin) {
 
 		Admin  dbAdmin = findByAccount(admin.getAccount());
+		if(dbAdmin == null) {
+			return null;
+		}
+
 		String comPass = DESUtil.encrypt(admin.getPassword(), DESUtil.CONST_DES_KEY_1);
 		if (dbAdmin.getPassword().equals(comPass)) {
 			return dbAdmin;

@@ -1,6 +1,6 @@
 package com.deercoder.commons.util.sql;
 
-import com.deercoder.commons.api.GetInfo;
+import com.deercoder.commons.api.GetInfoPager;
 import com.deercoder.commons.api.MapData;
 import com.deercoder.commons.api.Pager;
 import com.deercoder.commons.lib.Lib;
@@ -108,7 +108,7 @@ public class CrudUtil {
 			// 针对一些接口需要统计总数量问题, 不必重写接口
 			long sumPage = page.getTotalElements();//.getTotalPages();
 
-			return new GetInfo<Object>(Lib.CodeSuccess, Lib.MsgSuccess, content, new Pager(clientPage, (int) sumPage, everyPage));
+			return new GetInfoPager<Object>(Lib.CodeSuccess, Lib.MsgSuccess, content, new Pager(clientPage, (int) sumPage, everyPage));
 		} catch (IllegalArgumentException ex) {
 			return Lib.GetMapData(Lib.CodeText, Lib.MsgArgsErr);
 		} catch (EmptyResultDataAccessException ex) {
