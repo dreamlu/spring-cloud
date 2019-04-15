@@ -13,12 +13,7 @@ spring:
     port: 5672
     username: guest
     password: guest
-#  cloud:
-#    stream:
-#      bindings:
-#        countPerOut:
-#          destination: countPerTest # 队列名
-#          group: countPerGroup # 分组同一组接收消息
+
 
 eureka:
   client:

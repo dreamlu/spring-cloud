@@ -7,9 +7,13 @@ import com.deercoder.commons.model.CacheModel;
 import com.deercoder.commons.model.TokenModel;
 import com.wbkjcom.auth.model.Admin;
 import com.wbkjcom.auth.service.AdminService;
+import com.wbkjcom.auth.stream.StreamClient;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.integration.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +23,13 @@ import java.util.UUID;
 
 /**
  * des: 登录等权限验证操作
- * author: dreamlu
+ * @author dreamlu
  */
 
 @RestController
 @RequestMapping("/admin")
+//@EnableBinding(Source.class)
+@EnableBinding(StreamClient.class)
 public class AdminController {
 
 	private CacheManager cacheManager;
@@ -36,9 +42,21 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
+	// 只能针对单个服务
+	// 微服务用stream
+	//@Autowired
+	//private RabbitTemplate rabbitTemplate;
 
+	@Autowired
+	private StreamClient streamClient;
+
+	/**
+	 * 登陆操作
+	 * 消息队列测试:
+	 * 消息发送： login() 注释逻辑
+	 * 接受消息：{@link com.deercoder.shop.stream}
+	 * 配置查看application-dev.yaml
+	 */
 	@PostMapping(value = "/login")
 	@SuppressWarnings("Duplicates")
 	public Object login(@RequestBody Admin admin) {
@@ -52,8 +70,15 @@ public class AdminController {
 			cacheManager.set(model.getToken(), new CacheModel(30L, model));
 
 
+			// 这里处理非必须的操作逻辑
+			// 如通知、统计等
 			// 消息队列测试
-			rabbitTemplate.convertAndSend("account", admin.getAccount());
+			//rabbitTemplate.convertAndSend("account", admin.getAccount());
+
+			// stream--rabbitmq 消息队列测试
+			// spring cloud 发送队列消息
+			MessageBuilder<TokenModel> messageBuilder = MessageBuilder.withPayload(model);
+			streamClient.output().send(messageBuilder.build());
 
 			return Lib.GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, model);
 		}

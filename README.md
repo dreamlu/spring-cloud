@@ -18,7 +18,8 @@
 4.common 公共服务(阿里短信/文件上传/二维码/微信小程序授权/支付/提现等)  
 5.shop服务通用增删改查(jpa/mybatis)  
 6.配置中心(弃~全局配置替代)  
-7.commons 工具类(docker)打包时,clean install或借助插件安装到本地仓库    
+7.commons 工具类(docker)打包时,clean install或借助插件安装到本地仓库  
+8.缓存(待实现)    
 
 #### 扩展  
 - docker 支持  
@@ -43,7 +44,15 @@
 4.docker-compose管理docker(docker目录下:命令docker-compose -f docker-compose.yaml up -d)  
 5.运行结果查看同本地测试结果(http://localhost:8761)  
 
+- 消息队列demo  
+1.auth-service服务-->shop-service服务  
+2.suth-servicez中login生产队列消息-->shop-service中消费消息  
+3.队列消息的可靠性(待了解)  
+4.运行结果 
+![消息队列运行结果](common-service/static/file/queue.png)  
+
 - 注:  
 >1.如遇识别maven项目失败, 打开project structure-->Modules-->添加-->import module-->选择maven-->下一步-->完成    
->2.如遇全局变量(开发模式)注入编译失败情况,清确定为maven项目,然后build-->rebuild 对应模块  
+>2.如遇全局变量(开发模式)注入编译失败情况,清确定为maven项目,然后build-->rebuild 对应模块,或根pom.xml-->maven重新导入依赖  
+  
   

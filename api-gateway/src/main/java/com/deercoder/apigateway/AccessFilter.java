@@ -70,6 +70,9 @@ public class AccessFilter extends ZuulFilter {
 		}
 
 		if (!flag) {
+			/**
+			 * 以下注释为token简易验证
+			 */
 //			String token = request.getHeader("token");
 //			//ctx.setSendZuulResponse(false);
 //			//ctx.setResponseStatusCode(401);
