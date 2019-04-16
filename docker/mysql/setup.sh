@@ -3,7 +3,7 @@ if [[ $# -lt 1 ]]; then
     	echo "没有命令行参数,请重新执行"
 	exit
 fi
-bakdir="/etc/crontab"
+bakdir="/etc/cron.d/crontab"
 if [[ ! -f "$bakdir" ]]; then
   	touch ${bakdir}
 else
