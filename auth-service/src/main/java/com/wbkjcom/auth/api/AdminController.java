@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+import static com.deercoder.commons.lib.Constants.TOKEN_MINUTE;
+
 /**
  * des: 登录等权限验证操作
  * @author dreamlu
@@ -67,7 +69,7 @@ public class AdminController {
 			String     token = UUID.randomUUID().toString().replace("-", "");
 			TokenModel model = new TokenModel(admin.getId(), token);
 			// 30 分钟有效期
-			cacheManager.set(model.getToken(), new CacheModel(30L, model));
+			cacheManager.set(model.getToken(), new CacheModel(TOKEN_MINUTE, model));
 
 
 			// 这里处理非必须的操作逻辑

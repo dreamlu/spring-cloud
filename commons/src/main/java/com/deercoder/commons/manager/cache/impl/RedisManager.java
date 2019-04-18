@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -62,6 +63,14 @@ public class RedisManager implements CacheManager {
 
 		return redis.delete(key);
 	}
+
+	@Override
+	public Long deletePrex(Object keyPrex) {
+
+		Set<Object> keys = redis.keys(keyPrex);
+		return redis.delete(keys);
+	}
+
 
 	@Override
 	public CacheModel check(Object key) {

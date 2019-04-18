@@ -19,7 +19,7 @@
 5.shop服务通用增删改查(jpa/mybatis)  
 6.配置中心(弃~全局配置替代)  
 7.commons 工具类(docker)打包时,clean install或借助插件安装到本地仓库  
-8.缓存(待实现)    
+8.缓存  
 
 #### 扩展  
 - docker 支持  
@@ -50,6 +50,30 @@
 3.队列消息的可靠性(待了解)  
 4.运行结果 
 ![消息队列运行结果](common-service/static/file/queue.png)  
+
+- 缓存  
+1.此处为通用缓存  
+2.开启方式  
+```go
+/**
+ * 开启redis通用缓存
+ * 此处为通用缓存(业务查询多可用)
+ * 具体业务逻辑可根据源码改造
+ * 源码参考 {@link com.deercoder.commons.util.sql.CrudUtil}
+ * 缓存通用失效时间{@link com.deercoder.commons.lib.Constants}
+ *
+ * @author dreamlu
+ * @date 2019/04/17
+ */
+@Repository
+public class RedisConfig {
+
+	@Autowired
+	public void setRedis(RedisConnectionFactory redisConnectionFactory) {
+		CrudUtil.setCacheManager(redisConnectionFactory);
+	}
+}
+```  
 
 - 注:  
 >1.如遇识别maven项目失败, 打开project structure-->Modules-->添加-->import module-->选择maven-->下一步-->完成    

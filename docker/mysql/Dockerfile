@@ -16,6 +16,7 @@ COPY ["setup.sh","bak.sh","./"]
 #RUN sed -i "s/http:\/\/deb.debian.org\/debian/https:\/\/mirrors.aliyun.com\/debian\//g" /etc/apt/sources.list
 #RUN sed -i "s/http:\/\/security.debian.org\/debian-security/https:\/\/mirrors.aliyun.com\/debian-security\//g" /etc/apt/sources.list
 
+# 软件更新过慢, 待优化
 # 定时任务软件包
 # nohup 可后台执行
 RUN apt update && apt install cron -y --no-install-recommends

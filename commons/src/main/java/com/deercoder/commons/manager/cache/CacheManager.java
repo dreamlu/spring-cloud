@@ -35,6 +35,14 @@ public interface CacheManager {
 	public boolean delete(Object key);
 
 	/**
+	 * 模糊缓存删除
+	 *
+	 * @param keyPrex 模糊删除key
+	 * @return
+	 */
+	public Long deletePrex(Object keyPrex);
+
+	/**
 	 * 验证是否存在, 存在则延长时间
 	 * CacheModel 时间必填
 	 *

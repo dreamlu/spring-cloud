@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.deercoder.commons.lib.Constants.TOKEN_MINUTE;
 import static com.deercoder.commons.util.RestUtil.copyNonNullProperties;
 
 @Service
@@ -201,7 +202,7 @@ public class ShopServiceImpl implements ShopService {
 			String     token = UUID.randomUUID().toString().replace("-", "");
 			TokenModel model = new TokenModel(createData.getId(), token);
 			// 30 分钟有效期
-			cacheManager.set(model.getToken(), new CacheModel(30L, model));
+			cacheManager.set(model.getToken(), new CacheModel(TOKEN_MINUTE, model));
 			return Lib.GetMapData(Lib.CodeCreate, Lib.MsgCreate, model);
 		} catch (Exception e) {
 			return Lib.GetMapData(Lib.CodeSql, e.getCause().getCause().getMessage());
@@ -227,7 +228,7 @@ public class ShopServiceImpl implements ShopService {
 		String     token = UUID.randomUUID().toString().replace("-", "");
 		TokenModel model = new TokenModel(id, token);
 		// 30 分钟有效期
-		cacheManager.set(model.getToken(), new CacheModel(30L, model));
+		cacheManager.set(model.getToken(), new CacheModel(TOKEN_MINUTE, model));
 
 		return Lib.GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, model);
 	}
