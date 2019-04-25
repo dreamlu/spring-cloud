@@ -1,7 +1,7 @@
 # 基于Spring Boot的微服务应用
 
 本项目内容基于Spring Boot、Spring Cloud开发  
-创建数据库spring-cloud(表由jpa创建)  
+创建数据库spring-cloud(表由jpa自动创建)  
 表中数据第一次创建均为空,需要自行添加    
 
 ## 技术栈
@@ -20,6 +20,7 @@
 6.配置中心(弃~全局配置替代)  
 7.commons 工具类(docker)打包时,clean install或借助插件安装到本地仓库  
 8.缓存  
+9.feign模块间请求  
 
 #### 扩展  
 - docker 支持  
@@ -78,5 +79,6 @@ public class RedisConfig {
 - 注:  
 >1.如遇识别maven项目失败, 打开project structure-->Modules-->添加-->import module-->选择maven-->下一步-->完成    
 >2.如遇全局变量(开发模式)注入编译失败情况,清确定为maven项目,然后build-->rebuild 对应模块,或根pom.xml-->maven重新导入依赖  
-  
+>3.当配置feign进行模块间请求时,模块打包(包含docker镜像打包),在父项目下有的子项目在首次运行clean和install前应该先运行父项目的clean和install  
+
   

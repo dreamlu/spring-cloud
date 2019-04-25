@@ -87,4 +87,27 @@ public class Util {
 			return jsonData.get(fieldName);
 		}
 	}
+
+	/**
+	 * 判断对象以及内容是否为空
+	 *
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isObjEmpty(Object obj) {
+		try {
+			for (Field f : obj.getClass().getDeclaredFields()) {
+				f.setAccessible(true);
+
+				if (f.get(obj) != null) { //判断字段是否为空，并且对象属性中的基本都会转为对象类型来判断
+					return false;
+				}
+			}
+			return true;
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }

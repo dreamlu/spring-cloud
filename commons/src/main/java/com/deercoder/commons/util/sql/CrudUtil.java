@@ -282,6 +282,10 @@ public class CrudUtil {
 			cacheManager.deletePrex("*" + repository.toString() + "*");
 		}
 
+		if(Util.isObjEmpty(data)) {
+			return Lib.GetMapData(Lib.CodeValidateErr, "数据不能全部为空", null);
+		}
+
 		try {
 			Object createData = repository.save(data);
 			return Lib.GetMapData(Lib.CodeCreate, Lib.MsgCreate, new HashMap<String, Object>() {

@@ -22,6 +22,11 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
         <!-- spring boot实现Java Web服务-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,9 +86,16 @@
 
     <build>
         <plugins>
+            <!--被依赖项目必须配置项-->
+            <!-- 多模块依赖打包方式{https://blog.csdn.net/two_people/article/details/77883208} -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--                    <mainClass>CommonApplication</mainClass>-->
+                    <!--                    <layout>ZIP</layout>-->
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
 
             <!--docker 部署 -->

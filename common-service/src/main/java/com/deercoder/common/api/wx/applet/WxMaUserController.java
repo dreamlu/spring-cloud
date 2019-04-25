@@ -4,19 +4,29 @@ import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.deercoder.common.config.wx.WxMaConfiguration;
+import com.deercoder.common.model.AccessToken;
 import com.deercoder.common.model.Applet;
+import com.deercoder.common.model.ModelMsg;
+import com.deercoder.common.model.ModelMsgReturn;
 import com.deercoder.commons.lib.Lib;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * 微信小程序用户接口
  */
 @RestController
 @RequestMapping("/wx/applet")
+@Slf4j
 public class WxMaUserController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -68,23 +78,37 @@ public class WxMaUserController {
 
 	/**
 	 * <pre>
-	 * 获取用户绑定手机号信息, 微信不准确, 利用短信验证
+	 * 小程序模板消息
+	 * spring boot http请求参考：{https://blog.csdn.net/uotail/article/details/86255120}
 	 * </pre>
 	 */
-//    @GetMapping("/phone")
-//    public String phone(@PathVariable String appid, String sessionKey, String signature,
-//                        String rawData, String encryptedData, String iv) {
-//        final WxMaService wxService = WxMaConfiguration.getMaService(appid);
-//
-//        // 用户信息校验
-//        if (!wxService.getUserService().checkUserInfo(sessionKey, rawData, signature)) {
-//            return "user check failed";
-//        }
-//
-//        // 解密
-//        WxMaPhoneNumberInfo phoneNoInfo = wxService.getUserService().getPhoneNoInfo(sessionKey, encryptedData, iv);
-//
-//        return JsonUtils.toJson(phoneNoInfo);
-//    }
+	@PostMapping("/templateMsg")
+	public ModelMsgReturn templateMsg(@RequestBody ModelMsg data) {
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		AccessToken accessToken = getAccessToken(data.getAppid());
+		// 模板消息
+		String      url     = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + accessToken.getAccess_token();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		data.setAccess_token(accessToken.getAccess_token());
+
+		HttpEntity<ModelMsg>           request  = new HttpEntity<>(data, headers);
+		ResponseEntity<ModelMsgReturn> response = restTemplate.postForEntity(url, request, ModelMsgReturn.class);
+
+		return response.getBody();
+
+	}
+
+	public AccessToken getAccessToken(String appid) {
+		final WxMaService wxService = WxMaConfiguration.getMaService(appid);
+		RestTemplate restTemplate = new RestTemplate();
+		String       url          = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+appid+"&secret="+wxService.getWxMaConfig().getSecret();
+		//HttpEntity<MultiValueMap<String, String>> request  = new HttpEntity<>();
+		ResponseEntity<AccessToken> response = restTemplate.getForEntity(url, AccessToken.class);
+		log.info("access_token实体："+response.getBody());
+		return response.getBody();
+	}
 
 }
