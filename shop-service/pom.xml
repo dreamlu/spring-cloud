@@ -82,12 +82,12 @@
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
         <!-- 公共服务common-service 依赖 -->
-        <dependency>
-            <groupId>com.deercoder</groupId>
-            <artifactId>common-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <!--            <scope>compile</scope>-->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.deercoder</groupId>-->
+<!--            <artifactId>common-service</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--            &lt;!&ndash;            <scope>compile</scope>&ndash;&gt;-->
+<!--        </dependency>-->
 
     </dependencies>
 

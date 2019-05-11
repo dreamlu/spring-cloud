@@ -1,6 +1,6 @@
 package com.deercoder.shop.config;
 
-import com.deercoder.common.model.ModelMsg;
+import com.deercoder.commons.model.ws.ModelMsg;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

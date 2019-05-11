@@ -77,8 +77,11 @@ public class RedisConfig {
 ```  
 
 - 注:  
->1.如遇识别maven项目失败, 打开project structure-->Modules-->添加-->import module-->选择maven-->下一步-->完成    
->2.如遇全局变量(开发模式)注入编译失败情况,清确定为maven项目,然后build-->rebuild 对应模块,或根pom.xml-->maven重新导入依赖  
->3.当配置feign进行模块间请求时,模块打包(包含docker镜像打包),在父项目下有的子项目在首次运行clean和install前应该先运行父项目的clean和install  
+1.如遇识别maven项目失败, 打开project structure-->Modules-->添加-->import module-->选择maven-->下一步-->完成    
+2.如遇全局变量(开发模式)注入编译失败情况,清确定为maven项目,然后build-->rebuild 对应模块,或根pom.xml-->maven重新导入依赖  
+~~3.当配置feign进行模块间请求时,模块打包(包含docker镜像打包),在父项目下有的子项目在首次运行clean和install前应该先运行父项目的clean和install~~  
+
+- ps  
+1.微服务各个模块间尽量不要产生依赖,如不可避免依赖,请抽取出一个公共模块  
 
   

@@ -88,15 +88,16 @@
         <plugins>
             <!--被依赖项目必须配置项-->
             <!-- 多模块依赖打包方式{https://blog.csdn.net/two_people/article/details/77883208} -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!--                    <mainClass>CommonApplication</mainClass>-->
-                    <!--                    <layout>ZIP</layout>-->
-                    <classifier>exec</classifier>
-                </configuration>
-            </plugin>
+            <!-- 下段注释,被依赖时,打包安装需要,但是docker打包自身时,需要注释掉,否则会造成docker化的程序无法执行 -->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;                    <mainClass>CommonApplication</mainClass>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <layout>ZIP</layout>&ndash;&gt;-->
+<!--                    <classifier>exec</classifier>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
             <!--docker 部署 -->
             <plugin>

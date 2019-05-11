@@ -1,7 +1,7 @@
 package com.deercoder.shop.service.common;
 
-import com.deercoder.common.model.ModelMsg;
-import com.deercoder.common.model.ModelMsgReturn;
+import com.deercoder.commons.model.ws.ModelMsg;
+import com.deercoder.commons.model.ws.ModelMsgReturn;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
