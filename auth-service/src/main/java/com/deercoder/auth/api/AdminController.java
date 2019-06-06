@@ -1,17 +1,15 @@
-package com.wbkjcom.auth.api;
+package com.deercoder.auth.api;
 
+import com.deercoder.auth.model.Admin;
 import com.deercoder.commons.lib.Lib;
 import com.deercoder.commons.manager.cache.CacheManager;
 import com.deercoder.commons.manager.cache.impl.RedisManager;
 import com.deercoder.commons.model.CacheModel;
 import com.deercoder.commons.model.TokenModel;
-import com.wbkjcom.auth.model.Admin;
-import com.wbkjcom.auth.service.AdminService;
-import com.wbkjcom.auth.stream.StreamClient;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import com.deercoder.auth.service.AdminService;
+import com.deercoder.auth.stream.StreamClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;

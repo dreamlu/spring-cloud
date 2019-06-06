@@ -1,28 +1,27 @@
 package com.deercoder.common.api.wx.pay;
 
 import com.deercoder.common.config.wx.WxPayConfiguration;
-import com.github.binarywang.wxpay.bean.entpay.EntPayRequest;
-import com.github.binarywang.wxpay.bean.entpay.EntPayResult;
+import com.deercoder.common.model.wx.AppletEntPay;
+import com.deercoder.commons.api.GetInfoN;
+import com.deercoder.commons.lib.Lib;
+import com.github.binarywang.wxpay.bean.entpay.*;
 import com.github.binarywang.wxpay.exception.WxPayException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.binarywang.wxpay.service.WxPayService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.deercoder.commons.util.Util.randNum;
 
 /**
  * 企业付款相关接口
  */
-//@Api("企业付款")
-@RequestMapping("/pay")
+@Slf4j
+@RequestMapping("/wx/pay")
 @RestController
 public class EntPayController {
-//  private WxPayService wxService;
-//
-//  @Autowired
-//  public EntPayController(WxPayService wxService) {
-//    this.wxService = wxService;
-//  }
-//
 
 	/**
 	 * <pre>
@@ -34,37 +33,66 @@ public class EntPayController {
 	 * 接口链接：https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers
 	 * </pre>
 	 *
-	 * @param request 请求对象
+	 * @param applet 请求对象
 	 */
 	//@ApiOperation(value = "企业付款到零钱")
 	@PostMapping("/entPay")
-	public EntPayResult entPay(@RequestBody EntPayRequest request) throws WxPayException {
+	public GetInfoN entPay(@RequestBody AppletEntPay applet) throws WxPayException {
 
+		EntPayRequest request = new EntPayRequest();
+		request.setAppid(applet.getAppId());
+		request.setOpenid(applet.getOpenId());
+		request.setAmount(applet.getAmount());
+
+		// 订单号
+		String partnerTradeNo = System.nanoTime() + randNum(6);
 		request.setNonceStr("通知地址uri");
-		request.setPartnerTradeNo("100000982014120919616");    // 订单号
+		request.setPartnerTradeNo(partnerTradeNo);    // 订单号
 		//request.setOpenid();
 		request.setCheckName("NO_CHECK"); // 校验用户姓名选项
 		request.setDescription("提现到零钱"); // 备注
 		request.setSpbillCreateIp("127.0.0.1");
+		new Thread(() -> {
+			//无返回值的业务代码
+			try {
+				WxPayConfiguration.getWxPayService(request.getAppid()).getEntPayService().entPay(request);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+				//return Lib.GetMapData(Lib.CodeError, Lib.MsgWithDrawError, e.getMessage());
+			}
 
-		return WxPayConfiguration.getWxPayService(request.getAppid()).getEntPayService().entPay(request);
+		}).start();
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("partnerTradeNo", partnerTradeNo);
+		return Lib.GetMapDataSuccess(map);
 	}
-//
-//  /**
-//   * <pre>
-//   * 查询企业付款API
-//   * 用于商户的企业付款操作进行结果查询，返回付款操作详细结果。
-//   * 文档详见:https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_3
-//   * 接口链接：https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo
-//   * </pre>
-//   *
-//   * @param partnerTradeNo 商户订单号
-//   */
-//  //@ApiOperation(value = "查询企业付款到零钱的结果")
-//  @GetMapping("/queryEntPay/{partnerTradeNo}")
-//  public EntPayQueryResult queryEntPay(@PathVariable String partnerTradeNo) throws WxPayException {
-//    return this.wxService.getEntPayService().queryEntPay(partnerTradeNo);
-//  }
+
+	/**
+	 * <pre>
+	 * 查询企业付款API
+	 * 用于商户的企业付款操作进行结果查询，返回付款操作详细结果。
+	 * 文档详见:https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_3
+	 * 接口链接：https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo
+	 * </pre>
+	 *
+	 * @param partnerTradeNo 商户订单号
+	 */
+	//@ApiOperation(value = "查询企业付款到零钱的结果")
+	@GetMapping("/queryEntPay")
+	public Object queryEntPay(String appId, String partnerTradeNo) throws WxPayException {
+		EntPayQueryResult entPayQueryResult = WxPayConfiguration.getWxPayService(appId).getEntPayService().queryEntPay(partnerTradeNo);
+		if (!entPayQueryResult.getStatus().equals("SUCCESS")) {
+			return Lib.GetMapData(Lib.CodeError, Lib.MsgError, new HashMap<String, String>() {
+						{
+							put("status", entPayQueryResult.getStatus());
+						}
+					}
+			);
+
+		}
+		return Lib.MapSuccess;
+	}
 //
 //
 //  /**
@@ -92,41 +120,84 @@ public class EntPayController {
 //    return this.wxService.getEntPayService().getPublicKey();
 //  }
 //
-//  /**
-//   * 企业付款到银行卡.
-//   * <pre>
-//   * 用于企业向微信用户银行卡付款
-//   * 目前支持接口API的方式向指定微信用户的银行卡付款。
-//   * 文档详见：https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_2
-//   * 接口链接：https://api.mch.weixin.qq.com/mmpaysptrans/pay_bank
-//   * </pre>
-//   *
-//   * @param request 请求对象
-//   * @return the ent pay bank result
-//   * @throws WxPayException the wx pay exception
-//   */
-//  //@ApiOperation(value = "企业付款到银行卡")
-//  @PostMapping("/payBank")
-//  public EntPayBankResult payBank(EntPayBankRequest request) throws WxPayException {
-//    return this.wxService.getEntPayService().payBank(request);
-//  }
-//
-//  /**
-//   * 企业付款到银行卡查询.
-//   * <pre>
-//   * 用于对商户企业付款到银行卡操作进行结果查询，返回付款操作详细结果。
-//   * 文档详见：https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_3
-//   * 接口链接：https://api.mch.weixin.qq.com/mmpaysptrans/query_bank
-//   * </pre>
-//   *
-//   * @param partnerTradeNo 商户订单号
-//   * @return the ent pay bank query result
-//   * @throws WxPayException the wx pay exception
-//   */
-//  //@ApiOperation(value = "查询企业付款到银行卡的结果")
-//  @GetMapping("/queryPayBank/{partnerTradeNo}")
-//  public EntPayBankQueryResult queryPayBank(@PathVariable String partnerTradeNo) throws WxPayException {
-//    return this.wxService.getEntPayService().queryPayBank(partnerTradeNo);
-//  }
+
+	/**
+	 * 企业付款到银行卡.
+	 * <pre>
+	 * 用于企业向微信用户银行卡付款
+	 * 目前支持接口API的方式向指定微信用户的银行卡付款。
+	 * 文档详见：https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_2
+	 * 接口链接：https://api.mch.weixin.qq.com/mmpaysptrans/pay_bank
+	 * </pre>
+	 *
+	 * @param applet 请求对象
+	 * @return the ent pay bank result
+	 * @throws WxPayException the wx pay exception
+	 */
+	//@ApiOperation(value = "企业付款到银行卡")
+	@PostMapping("/payBank")
+	public Object payBank(@RequestBody AppletEntPay applet) throws Exception {
+
+		EntPayBankRequest request = new EntPayBankRequest();
+		request.setAppid(applet.getAppId());
+		request.setAmount(applet.getAmount());
+		request.setEncBankNo(applet.getEncBankNo());
+		request.setEncTrueName(applet.getEncTrueName());
+		request.setBankCode(applet.getBankCode());
+
+		// 订单号
+		String partnerTradeNo = System.nanoTime() + randNum(6);
+		request.setNonceStr("通知地址uri");
+		request.setPartnerTradeNo(partnerTradeNo);    // 订单号
+		//request.setOpenid();
+		request.setDescription("提现到银行卡"); // 备注
+		new Thread(() -> {
+			//无返回值的业务代码
+			try {
+				WxPayService wxPayService = WxPayConfiguration.getWxPayService(request.getAppid());
+
+				// 这里签名bug
+				// 根据文档 appid 不参与签名
+				//wxPayService.getConfig().setAppId(null);
+				request.setAppid(null);
+				wxPayService.getEntPayService().payBank(request);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}).start();
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("partnerTradeNo", partnerTradeNo);
+		return Lib.GetMapDataSuccess(map);
+	}
+
+	/**
+	 * 企业付款到银行卡查询.
+	 * <pre>
+	 * 用于对商户企业付款到银行卡操作进行结果查询，返回付款操作详细结果。
+	 * 文档详见：https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_3
+	 * 接口链接：https://api.mch.weixin.qq.com/mmpaysptrans/query_bank
+	 * </pre>
+	 *
+	 * @param partnerTradeNo 商户订单号
+	 * @return the ent pay bank query result
+	 * @throws WxPayException the wx pay exception
+	 */
+	//@ApiOperation(value = "查询企业付款到银行卡的结果")
+	@GetMapping("/queryPayBank")
+	public Object queryPayBank(String appid, String partnerTradeNo) throws WxPayException {
+		EntPayBankQueryResult entPayBankQueryResult = WxPayConfiguration.getWxPayService(appid).getEntPayService().queryPayBank(partnerTradeNo);
+
+		if (!entPayBankQueryResult.getStatus().equals("SUCCESS")) {
+			return Lib.GetMapData(Lib.CodeError, Lib.MsgError, new HashMap<String, String>() {
+						{
+							put("status", entPayBankQueryResult.getStatus());
+						}
+					}
+			);
+
+		}
+		return Lib.MapSuccess;
+	}
 
 }

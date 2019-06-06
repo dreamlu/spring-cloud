@@ -1,4 +1,4 @@
-package com.deercoder.common.model;
+package com.deercoder.common.model.wx;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,21 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Applet {
-
-	// appid
-	private String appid;
-
-	// code
-	private String code;
+public class AppletLogin {
 
 	private String sessionKey;
 
-	private String signature;
+	private String openId;
 
-	private String rawData;
-
-	private String encryptedData;
-
-	private String iv;
+	private String unionId;
 }

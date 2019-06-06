@@ -1,4 +1,4 @@
-package com.wbkjcom.auth.stream;
+package com.deercoder.auth.stream;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;

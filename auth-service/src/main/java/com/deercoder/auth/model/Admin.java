@@ -1,4 +1,4 @@
-package com.wbkjcom.auth.model;
+package com.deercoder.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.wbkjcom.auth.config;
+package com.deercoder.auth.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

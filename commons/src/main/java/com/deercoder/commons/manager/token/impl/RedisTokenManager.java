@@ -8,7 +8,7 @@ import com.deercoder.commons.model.TokenModel;
 import java.util.UUID;
 
 /**
- * com.wbkjcom.apigateway.manager.impl
+ * com.deercoder.apigateway.manager.impl
  */
 public class RedisTokenManager implements TokenManager {
 

@@ -100,6 +100,9 @@ public class CrudUtil {
 
 				// 查询数据
 				List content = repository.findAll(example, new Sort(Sort.Direction.DESC, "id"));
+				if(content.size() == 0) {
+					return Lib.MapNoResult;
+				}
 				res = Lib.GetMapData(Lib.CodeSuccess, Lib.MsgSuccess, content);
 				// 缓存开启判断
 				if (cacheManager != null) {

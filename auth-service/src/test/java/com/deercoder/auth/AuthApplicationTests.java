@@ -1,7 +1,7 @@
-package com.wbkjcom.auth;
+package com.deercoder.auth;
 
-import com.wbkjcom.auth.model.Admin;
-import com.wbkjcom.auth.service.AdminService;
+import com.deercoder.auth.model.Admin;
+import com.deercoder.auth.service.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

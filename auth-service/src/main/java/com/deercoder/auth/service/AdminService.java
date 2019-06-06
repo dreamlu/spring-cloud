@@ -1,6 +1,6 @@
-package com.wbkjcom.auth.service;
+package com.deercoder.auth.service;
 
-import com.wbkjcom.auth.model.Admin;
+import com.deercoder.auth.model.Admin;
 
 /**
  * admin

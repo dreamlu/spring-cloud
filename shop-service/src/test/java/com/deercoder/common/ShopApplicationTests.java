@@ -1,7 +1,7 @@
-//package com.wbkjcom.shop;
+//package com.deercoder.shop;
 //
-//import com.wbkjcom.shop.model.Shop;
-//import com.wbkjcom.shop.repository.ShopRepository;
+//import com.deercoder.shop.model.Shop;
+//import com.deercoder.shop.repository.ShopRepository;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.springframework.beans.factory.annotation.Autowired;

@@ -2,10 +2,15 @@ package com.deercoder.common.api.wx.pay;
 
 import com.deercoder.common.api.wx.config.Signature;
 import com.deercoder.common.config.wx.WxPayConfiguration;
+import com.deercoder.common.model.wx.Refund;
+import com.deercoder.commons.api.GetInfoN;
 import com.deercoder.commons.lib.Lib;
+import com.github.binarywang.wxpay.bean.request.WxPayRefundRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.bean.result.WxPayRefundResult;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 
+import static com.deercoder.commons.util.Util.randNum;
+
 /**
  * 多appid 支付/提现
- *  appid 必传
+ * appid 必传
+ *
  * @author dreamlu
  */
+@Slf4j
 @RestController
 @RequestMapping("/wx/pay")
 public class WxPayController {
@@ -28,6 +37,7 @@ public class WxPayController {
 //	public WxPayController() {
 //		this.wxService = WxPayConfiguration.getWxPayService();
 //	}
+
 	/**
 	 * Native 下单
 	 * 统一下单(详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1)
@@ -38,12 +48,12 @@ public class WxPayController {
 	 */
 	//@ApiOperation(value = "原生的统一下单接口")
 	@PostMapping("/appletPay")
-	public Object unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request) throws WxPayException, IllegalAccessException {
+	public GetInfoN unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request) throws WxPayException, IllegalAccessException {
 
 		WxPayUnifiedOrderResult res;
 		// 参数指定
-		request.setBody("优宜定");
-		request.setOutTradeNo(String.valueOf(Instant.now().getNano())); // 订单号
+		request.setBody("有客帮");
+		request.setOutTradeNo(System.nanoTime() + randNum(6)); // 订单号
 		//request.setTotalFee(request.getTotalFee()*100);
 		request.setSpbillCreateIp("127.0.0.1");
 		request.setNotifyUrl("通知地址");
@@ -141,7 +151,7 @@ public class WxPayController {
 //	}
 //
 
-//
+	//
 //	/**
 //	 * <pre>
 //	 * 微信支付-申请退款
@@ -153,10 +163,31 @@ public class WxPayController {
 //	 * @return 退款操作结果
 //	 */
 //	//@ApiOperation(value = "退款")
-//	@PostMapping("/refund")
-//	public WxPayRefundResult refund(@RequestBody WxPayRefundRequest request) throws WxPayException {
-//		return this.wxService.refund(request);
-//	}
+	@PostMapping("/refund")
+	public Object refund(@RequestBody Refund request) {
+
+
+		WxPayRefundRequest data = new WxPayRefundRequest();
+		// 退款单号
+		data.setOutRefundNo(System.nanoTime() + randNum(6));
+		data.setOutTradeNo(request.getOutTradeNo());
+		data.setRefundFee(request.getRefundFee());
+		data.setTotalFee(request.getTotalFee());
+		data.setRefundDesc(request.getRefundDesc());
+
+		try {
+			WxPayRefundResult wxPayRefundResult = WxPayConfiguration.getWxPayService(request.getAppId()).refund(data);
+
+			if (wxPayRefundResult.getResultCode().equals("SUCCESS")) {
+				return Lib.MapError;
+			}
+		} catch (WxPayException e) {
+			log.error("[退款异常] " + e.getMessage());
+			return Lib.GetMapData(Lib.CodeError, Lib.MsgError, e.getMessage());
+		}
+
+		return Lib.MapSuccess;
+	}
 //
 //	/**
 //	 * <pre>

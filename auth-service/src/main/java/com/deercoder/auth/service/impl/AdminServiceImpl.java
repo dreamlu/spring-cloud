@@ -1,9 +1,9 @@
-package com.wbkjcom.auth.service.impl;
+package com.deercoder.auth.service.impl;
 
+import com.deercoder.auth.model.Admin;
 import com.deercoder.commons.lib.Lib;
-import com.wbkjcom.auth.model.Admin;
-import com.wbkjcom.auth.repository.AdminRepository;
-import com.wbkjcom.auth.service.AdminService;
+import com.deercoder.auth.repository.AdminRepository;
+import com.deercoder.auth.service.AdminService;
 import com.deercoder.commons.util.ende.DESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

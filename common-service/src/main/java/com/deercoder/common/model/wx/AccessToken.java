@@ -1,4 +1,4 @@
-package com.deercoder.common.model;
+package com.deercoder.common.model.wx;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

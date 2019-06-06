@@ -21,6 +21,7 @@
 7.commons 工具类(docker)打包时,clean install或借助插件安装到本地仓库  
 8.缓存  
 9.feign模块间请求  
+10.rabbitmq消息队列[待完善]  
 
 #### 扩展  
 - docker 支持  
