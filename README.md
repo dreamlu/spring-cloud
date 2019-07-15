@@ -1,6 +1,6 @@
 # 基于Spring Boot的微服务应用
 
-【不再维护, 迁移https://gitlab.com/wobangkj/spring-cloud】  
+【不再维护, 迁移https://gitlab.com/wobangkj/spring-cloud  】  
 本项目内容基于Spring Boot、Spring Cloud开发  
 创建数据库spring-cloud(表由jpa自动创建)  
 表中数据第一次创建均为空,需要自行添加    
